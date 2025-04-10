@@ -4,6 +4,7 @@ import { Outlet, Link } from 'react-router-dom'
 
 function App() {
   const [products, setProducts] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -21,6 +22,24 @@ function App() {
     getProducts();
   }, [])
 
+  const checkCart = (item) => {
+    const temp = [...cart];
+    const filteredTemp = temp.filter(unit => unit.id === item.id);
+    return filteredTemp.length === 0 ? false : true;
+
+  }
+
+  const addToCart = (item) => {
+    const temp = [...cart];
+
+    if (!checkCart(item)) setCart(unit => [...unit, item]);
+    else {
+      const index = temp.findIndex(unit => unit.id === item.id);
+      temp[index].count = temp[index].count + item.count;
+      setCart(temp);
+    }
+  }
+
   return (
     <>
       <nav>
@@ -28,7 +47,7 @@ function App() {
         <Link to="shoppage">Shop</Link>
         <Link to="cart">Cart</Link>
       </nav>
-      <Outlet context={{products}}/>
+      <Outlet context={{products, cart, addToCart}}/>
     </>
   )
 }

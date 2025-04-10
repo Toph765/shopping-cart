@@ -3,13 +3,17 @@ import Card from "./Card";
 import styles from "./ShopPage.module.css";
 
 const ShopPage = () => {
-    const { products } = useOutletContext();
+    const { products, addToCart } = useOutletContext();
 
     return (
         <div className={styles.container}>
             {products && (products.map((obj) => {
                 return (
-                    <Card key={obj.id} obj={obj}/>
+                    <Card
+                        key={obj.id}
+                        obj={obj}
+                        addToCart={addToCart}
+                    />
                 )
             }))}
         </div>

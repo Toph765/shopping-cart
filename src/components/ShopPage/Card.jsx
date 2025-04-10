@@ -1,8 +1,15 @@
 import styles from "./ShopPage.module.css";
 import { useState } from "react";
 
-const Card = ({ obj }) => {
+const Card = ({ obj, addToCart }) => {
     const [number, setNumber] = useState(1);
+
+    const product = {
+        "id": obj.id,
+        "title": obj.title,
+        "image": obj.image,
+        "price": obj.price,
+    };
 
     const incNumber = (e) => {
         e.preventDefault();
@@ -19,6 +26,14 @@ const Card = ({ obj }) => {
         setNumber(value);
     }
 
+    const handleAddToCartBtn = (e) => {
+        e.preventDefault();
+        product["count"] = number;
+        console.log("from cart", product.count);
+        addToCart(product);
+        setNumber(1);
+    }
+
     return (
         <div>
             <img src={obj.image} alt={obj.category} className={styles.img} />
@@ -32,7 +47,7 @@ const Card = ({ obj }) => {
                     <input type="number" value={number} min="1" onChange={(e) => handleInputChange(e)}/>
                     <button onClick={incNumber}>+</button>
                 </div>
-            <button>Add to Cart</button>
+            <button onClick={e => handleAddToCartBtn(e)}>Add to Cart</button>
             </form>
         </div>
     )
