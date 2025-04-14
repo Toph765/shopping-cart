@@ -1,11 +1,11 @@
-const ItemCard = ({ obj, cart, setCart }) => {
+const ItemCard = ({ obj, cart, onChange }) => {
     const handleIncBtn = (e) => {
         e.preventDefault();
 
         const temp = [...cart];
         const index = temp.findIndex(unit => unit.id === obj.id);
         temp[index].count = temp[index].count + 1;
-        setCart(temp);
+        onChange(temp);
     }
 
     const handleDecBtn = (e) => {
@@ -15,7 +15,7 @@ const ItemCard = ({ obj, cart, setCart }) => {
             const temp = [...cart];
             const index = temp.findIndex(unit => unit.id === obj.id);
             temp[index].count = temp[index].count - 1;
-            setCart(temp);
+            onChange(temp);
         }
     }
 
@@ -27,7 +27,7 @@ const ItemCard = ({ obj, cart, setCart }) => {
         const index = temp.findIndex(unit => unit.id === obj.id);
         !num ? temp[index].count = "" : temp[index].count = num
         
-        setCart(temp);
+        onChange(temp);
     }
 
     return (
