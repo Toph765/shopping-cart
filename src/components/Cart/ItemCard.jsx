@@ -37,9 +37,9 @@ const ItemCard = ({ obj, cart, onChange }) => {
                 <p>{obj.title}</p>
                 <p>{obj.price}</p>
                 <form>
-                    <button onClick={(e) => handleDecBtn(e, obj)}>-</button>
+                    <button onClick={(e) => handleDecBtn(e)}>-</button>
                     <input type="number" value={obj.count} onChange={e => handleInputChange(e)}/>
-                    <button onClick={(e) => handleIncBtn(e, obj)}>+</button>
+                    <button onClick={(e) => handleIncBtn(e)}>+</button>
                 </form>
                 <p>{obj.count * obj.price}</p>
             </div>
