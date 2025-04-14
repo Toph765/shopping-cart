@@ -22,6 +22,10 @@ function App() {
     getProducts();
   }, [])
 
+  const testBtn = () => {
+    console.log(cart)
+  }
+
   const checkCart = (item) => {
     const temp = [...cart];
     const filteredTemp = temp.filter(unit => unit.id === item.id);
@@ -35,9 +39,14 @@ function App() {
     if (!checkCart(item)) setCart(unit => [...unit, item]);
     else {
       const index = temp.findIndex(unit => unit.id === item.id);
+      console.log("from app", item.count, temp[index].count);
       temp[index].count = temp[index].count + item.count;
       setCart(temp);
     }
+  }
+
+  const handleSetCart = (item) => {
+    setCart(item);
   }
 
   return (
@@ -47,7 +56,8 @@ function App() {
         <Link to="shoppage">Shop</Link>
         <Link to="cart">Cart</Link>
       </nav>
-      <Outlet context={{products, cart, addToCart}}/>
+      <button onClick={testBtn}>test</button>
+      <Outlet context={{products, cart, handleSetCart, addToCart}}/>
     </>
   )
 }
