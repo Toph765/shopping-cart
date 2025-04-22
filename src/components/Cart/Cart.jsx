@@ -1,5 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import ItemCard from "./ItemCard";
+import EmptyCart from "./EmptyCart";
 
 const Cart = () => {
     const { cart, handleSetCart } = useOutletContext();
@@ -19,12 +20,21 @@ const Cart = () => {
 
     return (
         <div>
-            {cart && (cart.map((obj) => {
-                return (
-                    <ItemCard key={obj.id} obj={obj} cart={cart} onChange={handleSetCart} />
-                );
-            }))}
-            {cart && displayTotal()}
+            {cart.length === 0 ? (
+                <EmptyCart/>
+            ) : (
+                    <>
+                    {cart.map((obj) => {
+                        return (
+                            <div key={obj.id}>
+                                <ItemCard obj={obj} cart={cart} onChange={handleSetCart} />
+                            </div>
+                            
+                        );
+                    })}
+                    {displayTotal()}
+                    </>
+            )}
         </div>
     )
 };
