@@ -1,4 +1,16 @@
+import { useRef } from "react";
+
 const ItemCard = ({ obj, cart, onChange }) => {
+    const delRef = useRef(null);
+
+    const openDelMsg = () => {
+        delRef.current.showModal();
+    }
+
+    const closeDelMsg = () => {
+        delRef.current.close();
+    }
+
     const handleIncBtn = (e) => {
         e.preventDefault();
 
@@ -16,6 +28,8 @@ const ItemCard = ({ obj, cart, onChange }) => {
             const index = temp.findIndex(unit => unit.id === obj.id);
             temp[index].count = temp[index].count - 1;
             onChange(temp);
+        } else {
+            openDelMsg();
         }
     }
 
@@ -25,14 +39,31 @@ const ItemCard = ({ obj, cart, onChange }) => {
         const temp = [...cart];
         const num = parseInt(value);
         const index = temp.findIndex(unit => unit.id === obj.id);
-        !num ? temp[index].count = "" : temp[index].count = num
+        !num ? temp[index].count = "" : temp[index].count = num;
         
+        onChange(temp);
+    }
+
+    const handleDelBtn = (e) => {
+        e.preventDefault();
+
+        const temp = [...cart];
+        const index = temp.findIndex(unit => unit.id === obj.id);
+        temp.splice(index, 1);
         onChange(temp);
     }
 
     return (
         <div>
+            <dialog ref={delRef}>
+                <p>{`Do you want to remove item/s?`}</p>
+                <div>
+                    <button onClick={(e) => handleDelBtn(e)}>yes</button>
+                    <button onClick={closeDelMsg}>cancel</button>
+                </div>
+            </dialog>
             <div>
+                <button onClick={openDelMsg}>X</button>
                 <img src={obj.image} alt={obj.title} />
                 <p>{obj.title}</p>
                 <p>{obj.price}</p>
