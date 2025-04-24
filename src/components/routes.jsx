@@ -1,5 +1,5 @@
 import App from "./App/App";
-import HomePage from "./HomePage";
+import HomePage from "./HomePage/HomePage";
 import ShopPage from "./ShopPage/ShopPage";
 import Cart from "./Cart/Cart";
 
