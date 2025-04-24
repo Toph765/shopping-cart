@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import { Outlet, Link } from 'react-router-dom'
+import styles from "./App.module.css";
 
 function App() {
   const [products, setProducts] = useState(null);
@@ -21,10 +21,6 @@ function App() {
 
     getProducts();
   }, [])
-
-  const testBtn = () => {
-    console.log(cart)
-  }
 
   const checkCart = (item) => {
     const temp = [...cart];
@@ -51,12 +47,14 @@ function App() {
 
   return (
     <>
-      <nav>
-        <Link to="homepage">Home</Link>
-        <Link to="shoppage">Shop</Link>
-        <Link to="cart">Cart</Link>
+      <nav className={styles.nav}>
+        <Link className={styles.link} to="homepage">Home </Link>
+        <Link className={styles.link} to="shoppage">Shop </Link>
+        <Link className={styles.link} to="cart">Cart</Link>
+        <div>
+          {cart.length > 0 && cart.length}
+        </div>
       </nav>
-      <button onClick={testBtn}>test</button>
       <Outlet context={{products, cart, handleSetCart, addToCart}}/>
     </>
   )
