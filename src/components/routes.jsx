@@ -1,7 +1,7 @@
-import App from "../App";
+import App from "./App/App";
 import HomePage from "./HomePage";
 import ShopPage from "./ShopPage/ShopPage";
-import Cart from "./Cart";
+import Cart from "./Cart/Cart";
 
 const routes = [
     {
