@@ -46,7 +46,7 @@ function App() {
   }
 
   return (
-    <>
+    <div>
       <nav className={styles.nav}>
         <Link className={styles.link} to="homepage">Home </Link>
         <Link className={styles.link} to="shoppage">Shop </Link>
@@ -56,7 +56,7 @@ function App() {
         </div>
       </nav>
       <Outlet context={{products, cart, handleSetCart, addToCart}}/>
-    </>
+    </div>
   )
 }
 
