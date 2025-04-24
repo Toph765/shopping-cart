@@ -1,0 +1,13 @@
+.link {
+    composes: third from "../styleModules/colors.module.css";
+    text-decoration: none;
+}
+
+.nav {
+    composes: gothicExpanded from "../styleModules/fonts.module.css";
+    display: flex;
+    gap: 4px;
+    padding: 1.2rem;
+    justify-content: flex-end;
+    font-size: 1.2rem;
+}

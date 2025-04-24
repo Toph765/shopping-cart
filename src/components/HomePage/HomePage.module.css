@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1.2rem;
+}
+
+.header {
+    composes: gothicExpanded from "../styleModules/fonts.module.css";
+    composes: fourth from "../styleModules/colors.module.css";
+    font-size: 2.4rem;
+}
+
+.text {
+    composes: raleway from "../styleModules/fonts.module.css";
+    composes: fourth from "../styleModules/colors.module.css";
+    font-size: 1.4rem;
+}
