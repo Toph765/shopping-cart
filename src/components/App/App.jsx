@@ -5,16 +5,28 @@ import styles from "./App.module.css";
 function App() {
   const [products, setProducts] = useState(null);
   const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const response = await fetch('https://fakestoreapi.com/products');
+
+        if (!response.ok) {
+          throw new Error(`HTTP error: Status ${response.status}`);
+        }
+
         const src = await response.json();
         setProducts(src);
       }
       catch (error) {
-        console.log(error);
+        setError(error.message);
+        setProducts(null);
+      }
+
+      finally {
+        setLoading(false);
       }
 
     }
@@ -35,7 +47,6 @@ function App() {
     if (!checkCart(item)) setCart(unit => [...unit, item]);
     else {
       const index = temp.findIndex(unit => unit.id === item.id);
-      console.log("from app", item.count, temp[index].count);
       temp[index].count = temp[index].count + item.count;
       setCart(temp);
     }
@@ -46,16 +57,18 @@ function App() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <nav className={styles.nav}>
         <Link className={styles.link} to="homepage">Home </Link>
         <Link className={styles.link} to="shoppage">Shop </Link>
         <Link className={styles.link} to="cart">Cart</Link>
-        <div>
-          {cart.length > 0 && cart.length}
+        <div className={styles.count}>
+          {cart.length > 0 && (<p className={styles.p}>{cart.length}</p>)}
         </div>
       </nav>
-      <Outlet context={{products, cart, handleSetCart, addToCart}}/>
+      <main className={styles.main}>
+        <Outlet context={{products, cart, handleSetCart, addToCart, loading, error}}/>
+      </main>
     </div>
   )
 }
