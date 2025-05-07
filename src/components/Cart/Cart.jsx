@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import ItemCard from "./ItemCard";
 import EmptyCart from "./EmptyCart";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
     const { cart, handleSetCart } = useOutletContext();
@@ -24,12 +25,14 @@ const Cart = () => {
             list.push(itemPrice);
         });
 
-        const total = list.reduce((accumulator, value) => accumulator + value, 0);
+        const temp = list.reduce((accumulator, value) => accumulator + value, 0);
+
+        const total = parseFloat(temp.toFixed(2));
 
         return (
-            <div>
-                <p>Total: {total}</p>
-                <button onClick={e => handleCheckOutBtn(e)}>Check Out</button>
+            <div className={styles.total}>
+                <p className={styles.totalTxt}>Total: {'$' + total}</p>
+                <button className={styles.checkOutBtn} onClick={e => handleCheckOutBtn(e)}>Check Out</button>
             </div>
         );
     }
@@ -49,16 +52,22 @@ const Cart = () => {
     }
 
     return (
-        <div>
-            <dialog ref={reference}>
-                <p>Thank you for Shopping!</p>
-                <button onClick={(e) => handleHomeBtn(e)}>Home</button>
-                <button onClick={(e) => handleShopBtn(e)}>Shop</button>
+        <div className={styles.container}>
+            <dialog className={styles.dialog} ref={reference}>
+                <div className={styles.dialogTxt}>
+                    <p>Thank you for Shopping!</p>
+                    <div>
+                        <button className={styles.dialogBtn} onClick={(e) => handleHomeBtn(e)}>Home</button>
+                        <button className={styles.dialogBtn} onClick={(e) => handleShopBtn(e)}>Shop</button> 
+                    </div>
+                </div>
+                
+                
             </dialog>
             {cart.length === 0 ? (
                 <EmptyCart/>
             ) : (
-                    <>
+                    <div className={styles.cart}>
                     {cart.map((obj) => {
                         return (
                             <div key={obj.id}>
@@ -68,7 +77,7 @@ const Cart = () => {
                         );
                     })}
                     {displayTotal()}
-                    </>
+                    </div>
             )}
         </div>
     )
