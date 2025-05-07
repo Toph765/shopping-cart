@@ -1,0 +1,149 @@
+.container {
+    background-color: whitesmoke;
+    min-height: 90vh;
+}
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    gap: 1.2rem;
+    padding-top: 1.2rem;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    height: 250px;
+    width: 700px;
+    background-color: white;
+    border: 1px solid #ECEFCA;
+}
+
+.img {
+    width: 30%;
+    object-fit: contain;
+}
+
+.text {
+    composes: raleway from "../styleModules/fonts.module.css";
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.removeBtn {
+    composes: thirdBg from '../styleModules/colors.module.css';
+    border-style: none;
+    width: 32px;
+    height: 32px;
+
+    position: absolute;
+    right: 1rem;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.inputBtn {
+    composes: thirdBg from '../styleModules/colors.module.css';
+    border-style: none;
+    width: 28px;
+    height: 28px;
+}
+
+.input {
+    width: 70px;
+    height: 28px;
+    padding: 0.4rem;
+    margin: 0 0.2rem;
+}
+
+.total {
+    composes: raleway from "../styleModules/fonts.module.css";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.totalTxt {
+    font-weight: bold;
+}
+
+.checkOutBtn {
+    composes: thirdBg from '../styleModules/colors.module.css';
+    composes: raleway from "../styleModules/fonts.module.css";
+    border-style: none;
+    height: 28px;
+    width: 98px;
+}
+
+.emptyMsg {
+    composes: raleway from "../styleModules/fonts.module.css";
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.8rem;
+    font-size: 1.6rem;
+    padding-top: 4rem;
+}
+
+.link {
+    composes: primary from '../styleModules/colors.module.css';
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px;
+    transition: transform 0.2s ease-out .02s;
+}
+
+.link:hover {
+    box-shadow: 4px 4px #547792;
+    transform: scale(1.2);
+}
+
+.dialog {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 30%;
+    height: 120px;
+    border: 2px solid #ECEFCA;
+}
+
+.dialogTxt {
+    composes: raleway from "../styleModules/fonts.module.css";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+}
+
+.dialogBtn {
+    composes: raleway from "../styleModules/fonts.module.css";
+    composes: thirdBg from '../styleModules/colors.module.css';
+    border-style: none;
+    width: 98px;
+    height: 32px;
+    margin-right: 0.8rem;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.inputBtn:hover,
+.removeBtn:hover,
+.checkOutBtn:hover,
+.dialogBtn:hover {
+    background-color: #547792;
+}

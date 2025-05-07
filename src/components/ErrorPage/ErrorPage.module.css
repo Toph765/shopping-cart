@@ -1,0 +1,20 @@
+.container {
+    composes: primaryBg from "../styleModules/colors.module.css";
+    composes: raleway from "../styleModules/fonts.module.css";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    min-height: 100vh;
+    font-size: 1.6rem;
+}
+
+.link {
+    composes: fourth from "../styleModules/colors.module.css";
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #94B4C1;
+}
