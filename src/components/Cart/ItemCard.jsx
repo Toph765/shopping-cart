@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import styles from "./Cart.module.css";
 
 const ItemCard = ({ obj, cart, onChange }) => {
     const delRef = useRef(null);
@@ -53,26 +54,42 @@ const ItemCard = ({ obj, cart, onChange }) => {
         onChange(temp);
     }
 
+    const computeTotal = (x, y) => {
+        const temp = x * y;
+        const total = parseFloat(temp.toFixed(2));
+        return (
+            <p>${total}</p>
+            )
+    }
+
     return (
         <div>
-            <dialog ref={delRef}>
-                <p>{`Do you want to remove item/s?`}</p>
-                <div>
-                    <button onClick={(e) => handleDelBtn(e)}>yes</button>
-                    <button onClick={closeDelMsg}>cancel</button>
+            <dialog className={styles.dialog} ref={delRef}>
+                <div className={styles.dialogTxt}>
+                    <p>{`Do you want to remove item/s?`}</p>
+                    <div>
+                        <button className={styles.dialogBtn} onClick={(e) => handleDelBtn(e)}>yes</button>
+                        <button className={styles.dialogBtn} onClick={closeDelMsg}>cancel</button>
+                    </div>
                 </div>
             </dialog>
-            <div>
-                <button onClick={openDelMsg}>X</button>
-                <img src={obj.image} alt={obj.title} />
-                <p>{obj.title}</p>
-                <p>{obj.price}</p>
-                <form>
-                    <button onClick={(e) => handleDecBtn(e)}>-</button>
-                    <input type="number" value={obj.count} onChange={e => handleInputChange(e)}/>
-                    <button onClick={(e) => handleIncBtn(e)}>+</button>
-                </form>
-                <p>{obj.count * obj.price}</p>
+            <div className={styles.card}>
+                <img className={styles.img} src={obj.image} alt={obj.title} />
+                <div className={styles.text}>
+                    <button className={styles.removeBtn} onClick={openDelMsg}>X</button>
+                    <div>
+                        <p className={styles.title}>{obj.title}</p>
+                        <p>{'$' + obj.price}</p>
+                    </div>
+                    <div>
+                        <form>
+                            <button  className={styles.inputBtn} onClick={(e) => handleDecBtn(e)}>-</button>
+                            <input className={styles.input} type="number" value={obj.count} onChange={e => handleInputChange(e)}/>
+                            <button className={styles.inputBtn} onClick={(e) => handleIncBtn(e)}>+</button>
+                        </form>
+                        {computeTotal(obj.count, obj.price)}
+                    </div>
+                </div>
             </div>
         </div>
     )
