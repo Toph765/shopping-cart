@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import styles from "./Cart.module.css";
 
 const EmptyCart = () => {
     return (
-        <div>
+        <div className={styles.emptyMsg}>
             <p>Your cart is empty~</p>
-            <Link to="/shoppage">Let's go Shopping!</Link>
+            <Link className={styles.link} to="/shoppage">Let's go Shopping!</Link>
         </div>
     )
 };
